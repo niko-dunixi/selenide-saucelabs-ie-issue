@@ -2,7 +2,6 @@ package wtf.paulbaker.automation;
 
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.Selenide;
-import com.codeborne.selenide.WebDriverRunner;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -12,6 +11,7 @@ import java.io.IOException;
 import java.util.*;
 
 import static com.codeborne.selenide.Selenide.open;
+import static com.codeborne.selenide.WebDriverRunner.*;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertNotNull;
 
@@ -44,10 +44,10 @@ public class SauceLabTest {
     public Iterator<Object[]> getSearchTerms() {
         List<Object[]> objects = new ArrayList<>();
         Set<String> browsers = new TreeSet<>();
-        browsers.add(WebDriverRunner.CHROME);
-        browsers.add(WebDriverRunner.INTERNET_EXPLORER);
-        browsers.add(WebDriverRunner.EDGE);
-        browsers.add(WebDriverRunner.FIREFOX);
+        browsers.add(CHROME);
+        browsers.add(INTERNET_EXPLORER);
+        browsers.add(EDGE);
+        browsers.add(FIREFOX);
         for (String browser : browsers) {
             objects.add(new Object[]{browser, "Asimov"});
             objects.add(new Object[]{browser, "Brandon Sanderson"});
