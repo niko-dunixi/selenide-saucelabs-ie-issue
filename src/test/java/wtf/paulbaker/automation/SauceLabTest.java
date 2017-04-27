@@ -12,6 +12,8 @@ import java.io.IOException;
 import java.util.*;
 
 import static com.codeborne.selenide.Selenide.open;
+import static org.testng.Assert.assertFalse;
+import static org.testng.Assert.assertNotNull;
 
 /**
  * Created by paul.baker on 4/27/17.
@@ -52,7 +54,10 @@ public class SauceLabTest {
     public void testSearch(String browser, String searchTerm) {
         Configuration.browser = browser;
         GoogleResultsPage googleResultsPage = open("search?q=" + searchTerm, GoogleResultsPage.class);
-        googleResultsPage.getResults().forEach(System.out::println);
+        List<String> results = googleResultsPage.getResults();
+        assertNotNull(results, "Page object didn't load elements correctly");
+        assertFalse(results.isEmpty(), "Page object didn't proxy correctly and no google results were found");
+        results.forEach(System.out::println);
         Selenide.close();
     }
 }
