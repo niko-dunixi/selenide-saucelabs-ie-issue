@@ -36,6 +36,11 @@ public class SauceLabTest {
     }
 
     private void setBrowser(String browser) {
+        if (INTERNET_EXPLORER.equals(browser)) {
+            browser = "internet explorer";
+        } else if (EDGE.equals(browser)) {
+            browser = "MicrosoftEdge";
+        }
         Configuration.browser = browser;
         setCapability("browserName", browser);
     }
