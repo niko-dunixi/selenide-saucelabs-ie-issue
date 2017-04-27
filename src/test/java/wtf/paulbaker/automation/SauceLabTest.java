@@ -35,6 +35,11 @@ public class SauceLabTest {
         System.setProperty("capabilities." + capability, value);
     }
 
+    private void setBrowser(String browser) {
+        Configuration.browser = browser;
+        setCapability("browserName", browser);
+    }
+
     @DataProvider(name = "searchTerms")
     public Iterator<Object[]> getSearchTerms() {
         List<Object[]> objects = new ArrayList<>();
@@ -52,7 +57,7 @@ public class SauceLabTest {
 
     @Test(dataProvider = "searchTerms")
     public void testSearch(String browser, String searchTerm) {
-        Configuration.browser = browser;
+        setBrowser(browser);
         GoogleResultsPage googleResultsPage = open("search?q=" + searchTerm, GoogleResultsPage.class);
         List<String> results = googleResultsPage.getResults();
         assertNotNull(results, "Page object didn't load elements correctly");
