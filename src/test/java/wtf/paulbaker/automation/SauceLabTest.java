@@ -6,9 +6,12 @@ import com.codeborne.selenide.WebDriverRunner;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
+import wtf.paulbaker.automation.pages.GoogleResultsPage;
 
 import java.io.IOException;
 import java.util.*;
+
+import static com.codeborne.selenide.Selenide.open;
 
 /**
  * Created by paul.baker on 4/27/17.
@@ -48,8 +51,8 @@ public class SauceLabTest {
     @Test(dataProvider = "searchTerms")
     public void testSearch(String browser, String searchTerm) {
         Configuration.browser = browser;
-        Selenide.open("search?q=" + searchTerm);
-        Selenide.sleep(5 * 1000); // Hold long enough to see the instance open in the browser
+        GoogleResultsPage googleResultsPage = open("search?q=" + searchTerm, GoogleResultsPage.class);
+        googleResultsPage.getResults().forEach(System.out::println);
         Selenide.close();
     }
 }
